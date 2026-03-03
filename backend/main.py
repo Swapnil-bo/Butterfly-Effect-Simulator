@@ -1,4 +1,8 @@
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from models import (
@@ -77,4 +81,5 @@ def generate_image_endpoint(request: ImageRequest):
         raise HTTPException(status_code=500, detail=str(e))
 
 
-# Run with: uvicorn main:app --host 127.0.0.1 --port 8000
+# Local:  uvicorn main:app --host 127.0.0.1 --port 8000
+# Render: uvicorn main:app --host 0.0.0.0 --port $PORT
