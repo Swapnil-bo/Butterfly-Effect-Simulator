@@ -4,6 +4,8 @@ export interface TimelineNodeData {
   year: string;
   event: string;
   impact: ImpactLevel;
+  imageUrl?: string;
+  isFinalNode?: boolean;
 }
 
 export interface TimelineNode {

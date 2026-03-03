@@ -29,7 +29,14 @@ export default function Home() {
       if (!res.ok) throw new Error(`Server error: ${res.status}`);
 
       const json = await res.json();
-      setNodes(json.data.nodes);
+      const timelineNodes = json.data.nodes as TimelineNode[];
+
+      // Mark the last node as final for the image placeholder
+      if (timelineNodes.length > 0) {
+        timelineNodes[timelineNodes.length - 1].data.isFinalNode = true;
+      }
+
+      setNodes(timelineNodes);
       setEdges(json.data.edges);
       setHasGenerated(true);
     } catch (err) {

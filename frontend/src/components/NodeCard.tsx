@@ -18,7 +18,8 @@ const impactBadgeColors: Record<string, string> = {
 };
 
 export default function NodeCard({ data }: NodeProps) {
-  const { year, event, impact } = data as unknown as TimelineNodeData;
+  const { year, event, impact, imageUrl, isFinalNode } =
+    data as unknown as TimelineNodeData;
   const borderColor = impactColors[impact] || "border-gray-600";
   const badgeColor = impactBadgeColors[impact] || "bg-gray-500/20 text-gray-400";
 
@@ -37,6 +38,22 @@ export default function NodeCard({ data }: NodeProps) {
       </div>
 
       <p className="text-sm text-gray-100 leading-relaxed">{event}</p>
+
+      {isFinalNode && !imageUrl && (
+        <div className="mt-3 w-full h-40 bg-gradient-to-br from-purple-900/40 to-indigo-900/40
+                        border border-purple-500/20 rounded-lg flex flex-col items-center justify-center gap-2">
+          <span className="text-3xl">🎨</span>
+          <p className="text-purple-300 text-xs font-medium">AI Image Coming Soon</p>
+        </div>
+      )}
+
+      {isFinalNode && imageUrl && (
+        <img
+          src={imageUrl}
+          alt={event}
+          className="mt-3 w-full rounded-lg"
+        />
+      )}
 
       <Handle type="source" position={Position.Bottom} className="opacity-0" />
     </div>

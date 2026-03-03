@@ -36,3 +36,12 @@ class GraphData(BaseModel):
 class GenerateResponse(BaseModel):
     status: str
     data: GraphData
+
+
+class ImageRequest(BaseModel):
+    final_event: str
+
+
+class ImageResponse(BaseModel):
+    status: str
+    image_url: str

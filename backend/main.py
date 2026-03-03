@@ -9,9 +9,12 @@ from models import (
     NodePosition,
     NodeData,
     TimelineEdge,
+    ImageRequest,
+    ImageResponse,
 )
 from ai_service import generate_timeline
 from graph_math import calculate_positions, generate_edges
+from image_service import generate_image
 
 app = FastAPI()
 
@@ -61,6 +64,15 @@ def generate(request: GenerateRequest):
             data=GraphData(nodes=nodes, edges=edge_models),
         )
 
+    except ValueError as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/generate-image", response_model=ImageResponse)
+def generate_image_endpoint(request: ImageRequest):
+    try:
+        image_url = generate_image(request.final_event)
+        return ImageResponse(status="success", image_url=image_url)
     except ValueError as e:
         raise HTTPException(status_code=500, detail=str(e))
 
