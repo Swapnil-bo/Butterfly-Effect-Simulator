@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import TimelineGraph from "@/components/TimelineGraph";
+import LoadingState from "@/components/LoadingState";
 import type { TimelineNode, TimelineEdge } from "@/lib/types";
 
 export default function Home() {
@@ -71,10 +72,28 @@ export default function Home() {
       </div>
 
       {error && (
-        <p className="text-red-400 mb-4">{error}</p>
+        <div className="bg-red-500/10 border border-red-500/30 rounded-lg px-5 py-4 mb-6 max-w-xl w-full">
+          <p className="text-red-400 font-medium mb-1">Generation failed</p>
+          <p className="text-red-300 text-sm">{error}</p>
+          <button
+            onClick={handleGenerate}
+            className="mt-3 text-sm text-red-400 hover:text-red-300 underline"
+          >
+            Try again
+          </button>
+        </div>
       )}
 
-      {hasGenerated && !loading && (
+      {loading && <LoadingState />}
+
+      {hasGenerated && !loading && !error && nodes.length < 2 && (
+        <div className="text-gray-500 text-center py-12">
+          <p className="text-lg mb-1">Not enough data to build a timeline.</p>
+          <p className="text-sm">Try a different decision and generate again.</p>
+        </div>
+      )}
+
+      {hasGenerated && !loading && !error && nodes.length >= 2 && (
         <div className="w-full" style={{ height: "70vh" }}>
           <TimelineGraph nodes={nodes} edges={edges} />
         </div>
