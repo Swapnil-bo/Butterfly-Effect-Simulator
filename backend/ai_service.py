@@ -20,7 +20,7 @@ def get_client():
 def get_model() -> str:
     provider = os.getenv("LLM_PROVIDER", "ollama")
     if provider == "groq":
-        return "llama3-8b-8192"
+        return "llama-3.1-8b-instant"
     return "qwen2.5:3b"
 
 
