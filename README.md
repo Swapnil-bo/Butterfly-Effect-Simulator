@@ -214,3 +214,5 @@ butterfly-effect-simulator/
 ## Built By
 
 **Swapnil** — targeting AI/ML Product Management internships. This project demonstrates structured AI data generation, interactive graph visualization, and full-stack deployment with a dual-LLM architecture.
+
+Built in 1 day using **Claude Code** (Opus 4.6) as an AI engineering partner — handling architecture validation, module implementation, and debugging across 7 phases while maintaining strict API contracts and hardware constraints.
